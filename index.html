@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Helps the browser identify support for mobile applications -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Title on the browser tab -->
+    <title>WebGIS</title>
+    <!-- Leaflet CSS Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <!-- Leaflet JavaScript Library -->
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <!-- Style for the fullscreen map display -->
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML Block to display the map -->
+    <div id="map"></div>
+
+    <script>
+      // Initialize the map
+      var map = L.map("map").setView([-7.9, 110.45], 10); // lat, long, zoom
+
+      // Define basemap layers
+      var basemap0 = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      });
+
+      var Esri_WorldImagery = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+        attribution: "Annisa Latifazahra &copy; &mdash; 23611102 Satistika UII",
+      });
+
+      var OpenTopoMap = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+        attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a>',
+      });
+
+      // Add a default basemap to the map
+      Esri_WorldImagery.addTo(map);
+
+      // Control Layer for switching basemaps
+      var baseMaps = {
+        "Open Street Map": basemap0,
+        "Open Topo Map": OpenTopoMap,
+        "Esri World Imagery": Esri_WorldImagery,
+      };
+
+      var overlayMaps = {}; // Empty object for now, can add overlays later
+
+      var layerControl = L.control.layers(baseMaps, overlayMaps, { collapsed: false });
+      layerControl.addTo(map);
+
+      // Marker
+      var marker = L.marker([-7.804, 110.3645]); // you can change the coordinate
+      marker.bindPopup("<b>Hello ! </b> <br> Saya Pohon");
+      marker.addTo(map);
+      marker.openPopup();
+      marker.bindTooltip();
+
+      // Custom marker
+      var customIcon1 = L.icon({
+        iconUrl: "https://e7.pngegg.com/pngimages/125/31/png-clipart-computer-icons-city-hall-building-city-buildings-angle-building.png",
+        iconSize: [40, 40],
+      });
+      var marker0 = L.marker([-7.6874832621204545, 110.41543590276083], { icon: customIcon1 });
+      marker0.addTo(map);
+
+      var markerBalai = L.marker([-6.215022975700788, 106.93846867179386]); // you can change the coordinate
+      markerBalai.bindPopup("Balai Desa Hutadame");
+      markerBalai.addTo(map);
+      markerBalai.openPopup();
+      markerBalai.bindTooltip("QWMQ+X9 Penggilingan, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai2 = L.marker([-6.321901144596742, 106.88094226577468]); // you can change the coordinate
+      markerBalai2.bindPopup("Balai Besar Pengembangan Latihan Masyarakat Jakarta");
+      markerBalai2.addTo(map);
+      markerBalai2.openPopup();
+      markerBalai2.bindTooltip("MVHJ+79 Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai3 = L.marker([-6.227433793557219, 106.90872762210685]); // you can change the coordinate
+      markerBalai3.bindPopup("Balai Warga Rw.06 Kelurahan Duren Sawit");
+      markerBalai3.addTo(map);
+      markerBalai3.openPopup();
+      markerBalai3.bindTooltip("QWF5+2G Pd. Bambu, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai4 = L.marker([-6.234985497574738, 106.93106558022237]); // you can change the coordinate
+      markerBalai4.bindPopup("BALAI WARGA 09 PONDOK KELAPA");
+      markerBalai4.addTo(map);
+      markerBalai4.openPopup();
+      markerBalai4.bindTooltip("QW8J+2C Pd. Klp., Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai5 = L.marker([-6.2191254346693805, 106.91288255758269]); // you can change the coordinate
+      markerBalai5.bindPopup("BALAI WARGA RW 10 KLENDER");
+      markerBalai5.addTo(map);
+      markerBalai5.openPopup();
+      markerBalai5.bindTooltip("QWJ7+84X, Jl. Kp. Sumur, RT.7/RW.10, Klender, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13470");
+
+      var markerBalai6 = L.marker([-6.213373962288038, 106.92566894898869]); // you can change the coordinate
+      markerBalai6.bindPopup("Balai Warga Perumahan Jatinegara Baru");
+      markerBalai6.addTo(map);
+      markerBalai6.openPopup();
+      markerBalai6.bindTooltip("QWPG+M7 Penggilingan, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai7 = L.marker([-6.245701996032278, 106.93647928212094]); // you can change the coordinate
+      markerBalai7.bindPopup("Balai RW 011 Pondok Kelapa");
+      markerBalai7.addTo(map);
+      markerBalai7.openPopup();
+      markerBalai7.bindTooltip("QW3P+PH Pd. Klp., Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai8 = L.marker([-6.17951856592215, 106.88203246003279]); // you can change the coordinate
+      markerBalai8.bindPopup("Balai RW 11 Kayu Putih Jakarta Timur");
+      markerBalai8.addTo(map);
+      markerBalai8.openPopup();
+      markerBalai8.bindTooltip("RVCJ+6R Kayu Putih, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai9 = L.marker([-6.294769265094646, 106.88050267107687]); // you can change the coordinate
+      markerBalai9.bindPopup("Balai Warga Rw 05");
+      markerBalai9.addTo(map);
+      markerBalai9.openPopup();
+      markerBalai9.bindTooltip("PV4J+36 Dukuh, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai10 = L.marker([-6.207032299182861, 106.89618766432974]); // you can change the coordinate
+      markerBalai10.bindPopup("KANTOR RW 11 KELURAHAN CIPINANG");
+      markerBalai10.addTo(map);
+      markerBalai10.openPopup();
+      markerApotek10.bindTooltip("QVVW+5F Cipinang, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai11 = L.marker([-6.319075664782143, 106.87885159746202]); // you can change the coordinate
+      markerBalai11.bindPopup("Balai masyarakat");
+      markerBalai11.addTo(map);
+      markerBalai11.openPopup();
+      markerBalai11.bindTooltip("MVJH+9G Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai12 = L.marker([-6.333307259635662, 106.87960598641793]); // you can change the coordinate
+      markerBalai12.bindPopup("Balai Warga RW 02");
+      markerBalai12.addTo(map);
+      markerBalai12.openPopup();
+      markerBalai12.bindTooltip("MV8H+MR Klp. Dua Wetan, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai13 = L.marker([-6.33636466455914, 106.87240728212095]); // you can change the coordinate
+      markerBalai13.bindPopup("Balai Warga RW 04 Ciracas");
+      markerBalai13.addTo(map);
+      markerBalai13.openPopup();
+      markerBalai13.bindTooltip("MV7C+FX Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai14 = L.marker([-6.199579566306905, 106.86576618886802]); // you can change the coordinate
+      markerBalai14.bindPopup("BALAI WARGA RW 01");
+      markerBalai14.addTo(map);
+      markerBalai14.openPopup();
+      markerBalai14.bindTooltip("RV28+58 Utan Kayu Sel., Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai15 = L.marker([-6.231564832262303, 106.91816161525321]); // you can change the coordinate
+      markerBalai15.bindPopup("Balai Warga / Sekretarat Rukun Warga 01");
+      markerBalai15.addTo(map);
+      markerBalai15.openPopup();
+      markerBalai15.bindTooltip("QW99+96 Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai16 = L.marker([-6.219216196716072, 106.94152252874738]); // you can change the coordinate
+      markerBalai16.bindPopup("Balai Rw.09");
+      markerBalai16.addTo(map);
+      markerBalai16.openPopup();
+      markerBalai16.bindTooltip("QWJR+8J Pd. Kopi, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai17 = L.marker([-6.326624994054794, 106.87496917107687]); // you can change the coordinate
+      markerBalai17.bindPopup("Kantor RW 02 Ciracas, Jakarta Timur");
+      markerBalai17.addTo(map);
+      markerBalai17.openPopup();
+      markerBalai17.bindTooltip("MVFF+9X Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai18 = L.marker([-6.221199295820685, 106.8857357968588]); // you can change the coordinate
+      markerBalai18.bindPopup("BALAI WARGA RW 07");
+      markerBalai18.addTo(map);
+      markerBalai18.openPopup();
+      markerBalai18.bindTooltip("QVHP+G6 Cipinang Besar Sel., Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai19 = L.marker([-6.218072609631665, 106.88065345758268]); // you can change the coordinate
+      markerBalai19.bindPopup("Kantor RW 011, CIPINANG BESAR UTARA");
+      markerBalai19.addTo(map);
+      markerBalai19.openPopup();
+      markerBalai19.bindTooltip("QVJJ+P7C, Jl. Cipinang Pulo Maja, Cipinang Besar Utara, Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13410");
+
+      var markerBalai20 = L.marker([-6.3558081501551325, 106.87853176432976]); // you can change the coordinate
+      markerBalai20.bindPopup("Kantor RW 04 Kelurahan Cibubur, Kec. Ciracas, Jakarta Timur");
+      markerBalai20.addTo(map);
+      markerBalai20.openPopup();
+      markerBalai20.bindTooltip("JVVH+MCR, Jl. Sarkawi, RT.10/RW.4, Cibubur, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13720");
+
+      var markerBalai21 = L.marker([-6.362429507861784, 106.88086059953955]); // you can change the coordinate
+      markerBalai21.bidPopup("Balai Warga Rw05");
+      markerBalai21.addTo(map);
+      markerBalai21.openPopup();
+      markerBalai21.bindTooltip("JVQJ+29 Cibubur, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai22 = L.marker([-6.350720313126355, 106.87040984312279]); // you can change the coordinate
+      markerBalai22.bidPopup("Balai RT 004 RW 003");
+      markerBalai22.addTo(map);
+      markerBalai22.openPopup();
+      markerBalai22.bindTooltip("JVXC+M5 Cibubur, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai23 = L.marker([-6.367213333584038, 106.8869145100659]); // you can change the coordinate
+      markerBalai23.bidPopup("Balai Warga Rw. 14 Cibubur");
+      markerBalai23.addTo(map);
+      markerBalai23.openPopup();
+      markerBalai23.bindTooltip("JVMP+4Q Cibubur, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai24 = L.marker([-6.327967233533248, 106.86324400118112]); // you can change the coordinate
+      markerBalai24.bidPopup("Balai Kegiatan Warga Rw. 01");
+      markerBalai24.addTo(map);
+      markerBalai24.openPopup();
+      markerBalai24.bindTooltip("MVC7+R86, Puri Gading Residence, Jl. Asem, RT.6/RW.1, Cijantung, Kec. Ps. Rebo, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13770");
+
+      var markerBalai25 = L.marker([-6.2310284624974726, 106.92859972449433]); // you can change the coordinate
+      markerBalai25.bidPopup("Balai RW 09 Malaka Sari");
+      markerBalai25.addTo(map);
+      markerBalai25.openPopup();
+      markerBalai25.bindTooltip("QW9H+JC5, Jl. Taman Malaka Sel., RT.3/RW.6, Pd. Klp., Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13450");
+
+      var markerBalai26 = L.marker([-6.231023129770721, 106.92861447664284]); // you can change the coordinate
+      markerBalai26.bidPopup("Balai RW 09 Malaka Sari");
+      markerBalai26.addTo(map);
+      markerBalai26.openPopup();
+      markerBalai26.bindTooltip("QW9H+JC5, Jl. Taman Malaka Sel., RT.3/RW.6, Pd. Klp., Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13450");
+
+      var markerBalai27 = L.marker([-6.3610912248373666, 106.88768111100015]); // you can change the coordinate
+      markerBalai27.bidPopup("KANTOR SEKRETARIAT RT. 006/RW. 011 VILLA CIBUBUR INDAH");
+      markerBalai27.addTo(map);
+      markerBalai27.openPopup();
+      markerBalai27.bindTooltip("JVQQ+H3 Cibubur, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai28 = L.marker([-6.234584665140269, 106.90369095332959]); // you can change the coordinate
+      markerBalai28.bidPopup("POS RT:010 RW:005");
+      markerBalai28.addTo(map);
+      markerBalai28.openPopup();
+      markerBalai28.bindTooltip("QW83+5F Pd. Bambu, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai29 = L.marker([-6.228180931672731, 106.93936026867068]); // you can change the coordinate
+      markerBalai29.bidPopup("BALAI RT 003/3 KP. RAWADAS");
+      markerBalai29.addTo(map);
+      markerBalai29.openPopup();
+      markerBalai29.bindTooltip("QWCQ+PP Pd. Kopi, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+
+      var markerBalai30 = L.marker([-6.234152028942029, 106.8819275629725]); // you can change the coordinate
+      markerBalai30.bidPopup("Balai Warga");
+      markerBalai30.addTo(map);
+      markerBalai30.openPopup();
+      markerBalai30.bindTooltip("QV8J+8Q Cipinang Muara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta");
+    </script>
+  </body>
+</html>
